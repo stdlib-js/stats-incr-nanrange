@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,42 +16,47 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
 
 /**
-* Compute a range incrementally, ignoring `NaN` values.
+* If provided a value, returns an updated range; otherwise, returns the current range.
 *
-* @module @stdlib/stats-incr-nanrange
+* @param x - value
+* @returns range
+*/
+type accumulator = ( x?: number ) => number | null;
+
+/**
+* Returns an accumulator function which incrementally computes a range, ignoring `NaN` values.
+*
+* @returns accumulator function
 *
 * @example
-* var incrnanrange = require( '@stdlib/stats-incr-nanrange' );
-*
 * var accumulator = incrnanrange();
 *
-* var range = accumulator();
+* var v = accumulator();
 * // returns null
 *
-* range = accumulator( 3.14 );
+* v = accumulator( 2.0 );
 * // returns 0.0
 *
-* range = accumulator( NaN );
-* // returns 0.0
+* v = accumulator( -1.0 );
+* // returns 3.0
 *
-* range = accumulator( -5.0 );
-* // returns 8.14
+* v = accumulator( NaN );
+* // returns 3.0
 *
-* range = accumulator( 10.1 );
-* // returns 15.1
+* v = accumulator( -3.0 );
+* // returns 5.0
 *
-* range = accumulator();
-* // returns 15.1
+* v = accumulator();
+* // returns 5.0
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function incrnanrange(): accumulator;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = incrnanrange;
